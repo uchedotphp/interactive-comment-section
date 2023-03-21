@@ -1,0 +1,4 @@
+@import 'tailwindcss/base';
+h1 {
+    @apply text-blue-600;
+}
