@@ -19,12 +19,12 @@ import IconMinus from './icons/IconMinus.vue'
 
 <style lang="scss" scoped>
 .vote-container {
-  @apply flex flex-col items-center bg-very-light-gray rounded-md;
+  @apply flex flex-col mobile:flex-row tablet:flex-col items-center bg-very-light-gray rounded-lg;
 }
 
 button,
 .count {
-  @apply px-2.5 text-sm;
+  @apply px-2.5;
 }
 
 button {
