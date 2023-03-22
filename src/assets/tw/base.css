@@ -2,7 +2,7 @@
 @import 'tailwindcss/base';
 
 body {
-  @apply bg-very-light-gray;
+  @apply bg-very-light-gray min-h-screen text-grayish-blue mobile:px-5;
   font-size: 16px;
   line-height: 1.6;
   transition: color 0.5s, background-color 0.5s;
