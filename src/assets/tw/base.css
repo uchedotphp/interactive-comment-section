@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Rubik:wght@400;500;700&display=swap');
 @import 'tailwindcss/base';
-h1 {
-    @apply text-blue-600;
+
+body {
+  @apply bg-very-light-gray;
+  font-size: 16px;
+  line-height: 1.6;
+  transition: color 0.5s, background-color 0.5s;
+  font-family: 'Rubik';
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
 }
