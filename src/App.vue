@@ -1,19 +1,28 @@
 <script setup lang="ts">
+import CommentContainer from './components/CommentContainer.vue'
+import CreateComment from './components/CreateComment.vue'
 </script>
 
 <template>
-<div>
-  <header>
-   header
-  </header>
+  <div class="max-w-xl mx-auto relative min-h-screen pt-8">
+    <main>
+      <section class="comments">
+        <CommentContainer v-for="n in 8" :key="n" />
+      </section>
 
-  <main>
-    main
-  </main>
-</div>
+      <section class="footer">
+        <CreateComment />
+      </section>
+    </main>
+  </div>
 </template>
 
-<style scoped>
-header {
+<style lang="scss" scoped>
+.comments {
+  @apply space-y-4 mb-8;
+}
+
+.footer {
+  @apply sticky bottom-0 left-0 right-0 bg-very-light-gray pb-8;
 }
 </style>
