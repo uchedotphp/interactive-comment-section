@@ -7,15 +7,15 @@ import ReplyConent from './ReplyConent.vue'
 
 <template>
   <ItemContainer>
-    <div class="comment-body">
-      <div class="vote">
+    <section class="comment-body">
+      <article class="vote">
         <VoteButtons />
         <div class="reply">
           <ReplyConent />
         </div>
-      </div>
+      </article>
 
-      <div class="content">
+      <section class="content">
         <div class="avatar-time">
           <Avatar>
             <template #name> amyrobson </template>
@@ -26,13 +26,13 @@ import ReplyConent from './ReplyConent.vue'
           </div>
         </div>
 
-        <div class="comment">
+        <article class="comment">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia numquam eos fugit
           cumque ipsa, asperiores, optio voluptates, aperiam tempore laborum nesciunt illum. Atque
           quaerat beatae, adipisci neque sunt sit molestiae!
-        </div>
-      </div>
-    </div>
+        </article>
+      </section>
+    </section>
   </ItemContainer>
 </template>
 

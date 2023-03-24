@@ -10,9 +10,9 @@ import CreateComment from './components/CreateComment.vue'
         <CommentContainer v-for="n in 8" :key="n" />
       </section>
 
-      <section class="footer">
+      <footer class="footer">
         <CreateComment />
-      </section>
+      </footer>
     </main>
   </div>
 </template>
