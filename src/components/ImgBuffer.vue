@@ -26,7 +26,4 @@
     @apply w-9 h-9 animate-spin fill-moderate-blue text-white;
   }
 }
-// .svg {
-//   @apply w-10 h-10 animate-spin fill-moderate-blue text-white;
-// }
 </style>
