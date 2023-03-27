@@ -1,15 +1,29 @@
 <script setup lang="ts">
+import { direction } from './types'
 import ItemContainer from './ItemContainer.vue'
 import VoteButtons from './VoteButtons.vue'
 import Avatar from './Avatar.vue'
 import ReplyConent from './ReplyConent.vue'
+
+import { useCommentStore } from '../stores/comments'
+const store = useCommentStore()
+
+import { provide, computed } from 'vue'
+const commentData = defineProps({ comment: Object })
+const count = computed(() => commentData.comment.score)
+provide('count', count)
+
+function vote(direction: direction) {
+  const id = commentData.comment.id
+  store.handleVote({ direction, id })
+}
 </script>
 
 <template>
   <ItemContainer>
     <section class="comment-body">
       <article class="vote">
-        <VoteButtons />
+        <VoteButtons @vote="vote" />
         <div class="reply">
           <ReplyConent />
         </div>
@@ -20,16 +34,14 @@ import ReplyConent from './ReplyConent.vue'
           <Avatar>
             <template #name> amyrobson </template>
           </Avatar>
-          <div class="ml-3">1 month ago</div>
+          <div class="ml-3">{{ comment.createdAt }}</div>
           <div class="ml-auto mobile:hidden tablet:block">
             <ReplyConent />
           </div>
         </div>
 
         <article class="comment">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia numquam eos fugit
-          cumque ipsa, asperiores, optio voluptates, aperiam tempore laborum nesciunt illum. Atque
-          quaerat beatae, adipisci neque sunt sit molestiae!
+          {{ comment.content }}
         </article>
       </section>
     </section>

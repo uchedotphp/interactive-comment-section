@@ -1,28 +1,55 @@
 <script setup lang="ts">
-import CommentContainer from './components/CommentContainer.vue'
+import { data } from './utils/data'
+import { onMounted } from 'vue'
+import type { Comment } from './components/types'
+
+import { storeToRefs } from 'pinia'
+import { useCommentStore } from './stores/comments'
+const store = useCommentStore()
+const { comments } = storeToRefs(store)
+
+onMounted(() => {
+  const comments = data.comments as Comment[]
+  store.setComments(comments)
+})
+
+import CommentBox from './components/CommentContainer.vue'
 import CreateComment from './components/CreateComment.vue'
+import NoComments from './components/NoComments.vue'
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto relative min-h-screen pt-8">
+  <div class="home">
     <main>
-      <section class="comments">
-        <CommentContainer v-for="n in 8" :key="n" />
+      <section v-if="comments.length" class="comments">
+        <CommentBox v-for="(comment, index) in comments" :key="index" :comment="comment" />
       </section>
 
-      <footer class="footer">
-        <CreateComment />
-      </footer>
+      <section v-else>
+        <NoComments />
+      </section>
     </main>
+    <div class="footer">
+      <CreateComment />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.home,
+.footer {
+  @apply max-w-xl mx-auto mobile:px-5;
+}
+
+.home {
+  @apply relative min-h-screen pt-8 pb-52 grid place-content-center;
+}
+
 .comments {
   @apply space-y-4 mb-8;
 }
 
 .footer {
-  @apply sticky bottom-0 left-0 right-0 bg-very-light-gray pb-8;
+  @apply fixed bottom-0 mobile:px-5 left-0 right-0 bg-very-light-gray pb-8;
 }
 </style>

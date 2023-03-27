@@ -1,25 +1,34 @@
 <script setup lang="ts">
+import type { direction } from './types'
+import { inject } from 'vue'
 import IconPlus from './icons/IconPlus.vue'
 import IconMinus from './icons/IconMinus.vue'
+
+const count = inject('count')
+const emit = defineEmits(['vote'])
+
+function vote(direction: direction) {
+  emit('vote', direction)
+}
 </script>
 
 <template>
-  <div class="vote-container">
-    <button>
-      <IconPlus />
+  <article class="vote-container">
+    <button type="button group" data-cy="up-vote" @click="vote('up')">
+      <IconPlus class="icon" />
     </button>
 
-    <div class="count">12</div>
+    <div class="count" data-cy="count">{{ count }}</div>
 
-    <button>
-      <IconMinus />
+    <button type="button group" @click="vote('down')">
+      <IconMinus class="icon" />
     </button>
-  </div>
+  </article>
 </template>
 
 <style lang="scss" scoped>
 .vote-container {
-  @apply flex flex-col mobile:flex-row tablet:flex-col items-center bg-very-light-gray rounded-lg;
+  @apply flex flex-col mobile:flex-row tablet:flex-col items-center bg-very-light-gray w-9 rounded-lg;
 }
 
 button,
@@ -28,11 +37,15 @@ button,
 }
 
 button {
-  @apply h-9 hover:text-soft-red;
+  @apply h-9;
 
-  svg {
-    @apply hover:stroke-moderate-blue;
-  }
+  // svg {
+  //   @apply hover:stroke-moderate-blue;
+  // }
+}
+
+.icon {
+  @apply w-3 h-3 group-hover:stroke-moderate-blue;
 }
 
 .count {

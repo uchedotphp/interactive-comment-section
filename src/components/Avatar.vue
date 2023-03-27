@@ -1,14 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import ImgBuffer from './ImgBuffer.vue'
+
+const isImgLoaded = ref(false)
+function onImgLoad() {
+  isImgLoaded.value = true
+}
+</script>
 
 <template>
   <a href="#" class="group block flex-shrink-0">
     <div class="flex items-center">
-      <div>
+      <div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-full bg-gray-100 h-9 relative">
         <img
-          class="inline-block h-9 w-9 rounded-full"
+          @load="onImgLoad"
+          class="img"
           src="https://source.unsplash.com/random"
           alt="random unsplash image"
+          :class="{ blur: !isImgLoaded }"
         />
+        <ImgBuffer v-show="!isImgLoaded" class="absolute" />
       </div>
       <p v-show="$slots.name" class="name"><slot name="name" /></p>
     </div>
@@ -18,5 +29,9 @@
 <style scoped>
 .name {
   @apply ml-4 text-dark-blue font-medium;
+}
+
+.img {
+  @apply object-cover object-center w-9 h-9;
 }
 </style>
