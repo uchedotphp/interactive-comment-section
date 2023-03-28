@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import ImgBuffer from './ImgBuffer.vue'
-defineProps(['loading'])
+const propsData = defineProps({ loading: Boolean, disabled: Boolean })
 const emit = defineEmits(['click'])
+const disableBtn = computed(() => propsData.loading || Boolean(propsData.disabled))
 </script>
 
 <template>
-  <button :disabled="loading" class="btn-big" @click="emit('click')">
+  <button
+    :disabled="disableBtn"
+    class="btn-big"
+    :class="{ disabled: disableBtn }"
+    @click="emit('click')"
+  >
     <slot v-if="!loading" />
     <slot v-else name="loading">
       <ImgBuffer class="h-6" />
@@ -13,4 +20,8 @@ const emit = defineEmits(['click'])
   </button>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.disabled {
+  @apply cursor-not-allowed;
+}
+</style>
