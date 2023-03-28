@@ -50,7 +50,7 @@ import ImgBuffer from './components/ImgBuffer.vue'
 <style lang="scss" scoped>
 .home,
 .footer {
-  @apply max-w-xl mx-auto mobile:px-5;
+  @apply max-w-screen-tablet mx-auto mobile:px-5 break-all;
 }
 
 .home {
