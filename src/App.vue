@@ -32,7 +32,7 @@ import ImgBuffer from './components/ImgBuffer.vue'
     <template v-if="!pageLoading">
       <main>
         <section v-if="comments.length" class="comments">
-          <CommentBox v-for="(comment, index) in comments" :key="index" :comment="comment" />
+          <CommentBox v-for="comment in comments" :key="comment.id" :comment="comment" />
         </section>
 
         <section v-else>

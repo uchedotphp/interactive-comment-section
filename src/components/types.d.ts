@@ -2,7 +2,7 @@ export interface Comment {
     id: number
     content: string
     score: number
-    createdAt: string
+    createdAt: string | Date | number
 }
 
 type direction = 'up' | 'down'
