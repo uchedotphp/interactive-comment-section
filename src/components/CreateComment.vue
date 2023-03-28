@@ -1,6 +1,24 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Avatar from './Avatar.vue'
 import ItemContainer from './ItemContainer.vue'
+import BaseBtn from './BaseBtn.vue'
+import { useCommentStore } from '../stores/comments'
+const store = useCommentStore()
+
+let comment = ref('')
+let sendBtnLoading = ref(false)
+
+function create() {
+  sendBtnLoading.value = true
+  try {
+    store.createComment(comment.value)
+  } catch (error) {
+    console.log('something went wrong', error)
+  }
+  comment.value = ''
+  sendBtnLoading.value = false
+}
 </script>
 
 <template>
@@ -14,11 +32,12 @@ import ItemContainer from './ItemContainer.vue'
         id="comment"
         class="txt-area"
         placeholder="Add your comment..."
+        v-model="comment"
       ></textarea>
 
       <div class="flex items-center w-full tablet:w-auto pt-4 mobile:pt-0 flex-shrink-0">
         <Avatar class="block tablet:hidden mr-auto" />
-        <button type="submit" class="btn-big">send</button>
+        <BaseBtn :loading="sendBtnLoading" @click="create"> Send </BaseBtn>
       </div>
     </div>
   </ItemContainer>
