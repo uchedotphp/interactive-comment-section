@@ -37,7 +37,7 @@ function create() {
 
       <div class="flex items-center w-full tablet:w-auto pt-4 mobile:pt-0 flex-shrink-0">
         <Avatar class="block tablet:hidden mr-auto" />
-        <BaseBtn :loading="sendBtnLoading" @click="create"> Send </BaseBtn>
+        <BaseBtn :disabled="!comment.length" :loading="sendBtnLoading" @click="create"> Send </BaseBtn>
       </div>
     </div>
   </ItemContainer>
