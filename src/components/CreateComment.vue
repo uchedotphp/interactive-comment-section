@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import Avatar from './Avatar.vue'
 import ItemContainer from './ItemContainer.vue'
 import BaseBtn from './BaseBtn.vue'
@@ -8,6 +8,8 @@ const store = useCommentStore()
 
 let comment = ref('')
 let sendBtnLoading = ref(false)
+
+const disableSendBtn = computed(() => comment.value.length < 20)
 
 function create() {
   sendBtnLoading.value = true
@@ -37,7 +39,9 @@ function create() {
 
       <div class="flex items-center w-full tablet:w-auto pt-4 mobile:pt-0 flex-shrink-0">
         <Avatar class="block tablet:hidden mr-auto" />
-        <BaseBtn :disabled="!comment.length" :loading="sendBtnLoading" @click="create"> Send </BaseBtn>
+        <BaseBtn :disabled="disableSendBtn" :loading="sendBtnLoading" @click="create">
+          Send
+        </BaseBtn>
       </div>
     </div>
   </ItemContainer>
