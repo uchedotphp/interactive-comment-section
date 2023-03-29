@@ -8,7 +8,7 @@ import ReplyConent from './ReplyConent.vue'
 import { useCommentStore } from '../stores/comments'
 const store = useCommentStore()
 
-import { provide, computed } from 'vue'
+import { provide, computed, ref } from 'vue'
 const commentData = defineProps({ comment: Object })
 const count = computed(() => commentData.comment.score)
 provide('count', count)
@@ -16,6 +16,17 @@ provide('count', count)
 function vote(direction: direction) {
   const id = commentData.comment.id
   store.handleVote({ direction, id })
+}
+
+const commentElement = ref<HTMLInputElement | null>(null)
+
+const isTruncated = computed(() => {
+  const container = commentElement.value
+  return container?.scrollHeight ? container.scrollHeight > container.clientHeight : false
+})
+
+function expandView() {
+  commentElement.value.classList.remove('truncate')
 }
 </script>
 
@@ -40,8 +51,16 @@ function vote(direction: direction) {
           </div>
         </div>
 
-        <article class="comment">
+        <article class="comment" ref="commentElement" :class="{ truncate: isTruncated }">
           {{ comment.content }}
+          <a
+            v-if="isTruncated"
+            href="#"
+            @click.prevent="expandView"
+            class="text-moderate-blue show-more"
+          >
+            show more
+          </a>
         </article>
       </section>
     </section>
@@ -61,12 +80,19 @@ function vote(direction: direction) {
 }
 
 .content {
-  @apply space-y-3;
+  @apply space-y-3 w-full;
   .avatar-time {
     @apply flex items-center;
   }
   .comment {
-    @apply mobile:order-first tablet:order-last;
+    @apply mobile:order-first tablet:order-last break-all;
+    max-height: 5em; /* Set the maximum height to 3 lines */
+    // overflow-y: hidden;
+  }
+  .show-more {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
   }
 }
 </style>

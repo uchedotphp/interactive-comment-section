@@ -31,6 +31,9 @@ import ImgBuffer from './components/ImgBuffer.vue'
   <div class="home">
     <template v-if="!pageLoading">
       <main>
+        <div class="truncate">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit id quam quasi similique eveniet cupiditate dolorem nobis necessitatibus atque! Dicta, doloremque nesciunt asperiores commodi, molestiae voluptate aut repudiandae blanditiis, voluptatibus beatae quam quae dignissimos! Nulla porro, magni in inventore fugiat placeat sint asperiores numquam quod aliquam hic doloremque minus tempora!
+        </div>
         <section v-if="comments.length" class="comments">
           <CommentBox v-for="comment in comments" :key="comment.id" :comment="comment" />
         </section>
@@ -50,7 +53,7 @@ import ImgBuffer from './components/ImgBuffer.vue'
 <style lang="scss" scoped>
 .home,
 .footer {
-  @apply max-w-screen-tablet mx-auto mobile:px-5 break-all;
+  @apply max-w-xl w-60 mx-auto mobile:px-5;
 }
 
 .home {
