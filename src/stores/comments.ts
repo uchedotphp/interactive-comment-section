@@ -17,5 +17,22 @@ export const useCommentStore = defineStore('comments', () => {
     }
   }
 
-  return { comments, replies, setComments, handleVote }
+  function createComment(comment: string) {
+    try {
+      if (comment.length) {
+        const id = comments.value[comments.value.length - 1].id + 1
+        const newComment: Comment = {
+          id,
+          content: comment,
+          score: 0,
+          createdAt: new Date().getTime()
+        }
+        comments.value.push(newComment)
+      }
+    } catch (error) {
+      throw new Error("Something went wrong");
+    }
+  }
+
+  return { comments, replies, setComments, handleVote, createComment }
 })

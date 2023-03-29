@@ -21,7 +21,7 @@
 
 <style lang="scss" scoped>
 .imageLoader {
-  @apply inset-0 z-20 grid place-content-center;
+  @apply inset-0 grid place-content-center;
   .svg {
     @apply w-9 h-9 animate-spin fill-moderate-blue text-white;
   }
