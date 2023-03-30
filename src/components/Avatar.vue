@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import ImgBuffer from './ImgBuffer.vue'
 
+defineProps({ id: Number, String, undefined })
+
 const isImgLoaded = ref(false)
 function onImgLoad() {
   isImgLoaded.value = true
@@ -15,7 +17,7 @@ function onImgLoad() {
         <img
           @load="onImgLoad"
           class="img"
-          src="https://source.unsplash.com/random"
+          :src="`https://source.unsplash.com/random/${ id ? Number(id) : '' }`"
           alt="random unsplash image"
           :class="{ blur: !isImgLoaded }"
         />
