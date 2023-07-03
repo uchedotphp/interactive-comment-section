@@ -1,5 +1,1 @@
 @import 'tailwindcss/components';
-
-.btn-big {
-  @apply inline-flex items-center uppercase rounded-md bg-moderate-blue px-7 py-3 text-sm font-medium text-white shadow-sm hover:bg-light-grayish-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-moderate-blue;
-}

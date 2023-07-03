@@ -28,7 +28,7 @@ function vote(direction: direction) {
 
 <style lang="scss" scoped>
 .vote-container {
-  @apply flex flex-col mobile:flex-row tablet:flex-col items-center bg-very-light-gray w-9 rounded-lg;
+  @apply rounded-lg flex flex-col mobile:flex-row tablet:flex-col items-center bg-very-light-gray w-9;
 }
 
 button,

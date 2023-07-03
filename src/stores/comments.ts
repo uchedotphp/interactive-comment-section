@@ -1,5 +1,6 @@
 import { ref } from 'vue'
-import type { Comment, direction } from '@/components/types'
+import type { Comment, direction, categories } from '@/components/types'
+import { useSettingsStore } from './settings'
 import { defineStore } from 'pinia'
 
 export const useCommentStore = defineStore('comments', () => {
@@ -17,7 +18,8 @@ export const useCommentStore = defineStore('comments', () => {
     }
   }
 
-  function createComment(comment: string) {
+  function createComment({ comment, category = 'unlabelled' }: { comment: string, category: categories }) {
+    const settings = useSettingsStore()
     try {
       if (comment.length) {
         const id = comments.value[comments.value.length - 1].id + 1
@@ -25,7 +27,9 @@ export const useCommentStore = defineStore('comments', () => {
           id,
           content: comment,
           score: 0,
-          createdAt: new Date().getTime()
+          createdAt: new Date().getTime(),
+          category,
+          user: settings.userProfile
         }
         comments.value.push(newComment)
       }

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import ImgBuffer from './ImgBuffer.vue'
 
-defineProps({ id: Number, String, undefined })
+defineProps({ id: Number, String, undefined, imgUrl: String })
 
 const isImgLoaded = ref(false)
 function onImgLoad() {
@@ -15,9 +15,18 @@ function onImgLoad() {
     <div class="flex items-center">
       <div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-full bg-gray-100 h-9 relative">
         <img
+          v-if="imgUrl"
           @load="onImgLoad"
           class="img"
-          :src="`https://source.unsplash.com/random/${ id ? Number(id) : '' }`"
+          :src="imgUrl"
+          alt="random unsplash image"
+          :class="{ blur: !isImgLoaded }"
+        />
+        <img
+          v-else
+          @load="onImgLoad"
+          class="img"
+          :src="`https://source.unsplash.com/random/${id ? Number(id) : ''}`"
           alt="random unsplash image"
           :class="{ blur: !isImgLoaded }"
         />
@@ -30,7 +39,7 @@ function onImgLoad() {
 
 <style scoped>
 .name {
-  @apply ml-4 text-dark-blue font-medium;
+  @apply ml-4 text-dark-blue font-medium capitalize;
 }
 
 .img {
