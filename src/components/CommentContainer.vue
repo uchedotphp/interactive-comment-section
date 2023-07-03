@@ -42,8 +42,8 @@ function expandView() {
 
       <section class="content">
         <div class="avatar-time">
-          <Avatar>
-            <template #name> amyrobson </template>
+          <Avatar :img-url="comment.user.imgUrl">
+            <template #name> {{ comment.user.fullName }} </template>
           </Avatar>
           <div class="ml-3">{{ comment.createdAt }}</div>
           <div class="ml-auto mobile:hidden tablet:block">
@@ -86,11 +86,11 @@ function expandView() {
   }
   .comment {
     @apply mobile:order-first tablet:order-last break-all;
-    max-height: 5em; /* Set the maximum height to 3 lines */
+    // max-height: 5em; /* Set the maximum height to 3 lines */
     // overflow-y: hidden;
   }
   .show-more {
-    display: block;
+    display: inline-block;
     text-align: center;
     margin-top: 5px;
   }

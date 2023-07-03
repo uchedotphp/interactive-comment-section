@@ -3,10 +3,14 @@ import { computed, ref } from 'vue'
 import Avatar from './Avatar.vue'
 import ItemContainer from './ItemContainer.vue'
 import BaseBtn from './BaseBtn.vue'
+import CategoryLabels from './CategoryLabels.vue'
+import { categories } from './types'
+
 import { useCommentStore } from '../stores/comments'
 const store = useCommentStore()
 
 let comment = ref('')
+let selectedCategory = ref('unlabelled' as categories)
 let sendBtnLoading = ref(false)
 
 const disableSendBtn = computed(() => comment.value.length < 20)
@@ -14,7 +18,7 @@ const disableSendBtn = computed(() => comment.value.length < 20)
 function create() {
   sendBtnLoading.value = true
   try {
-    store.createComment(comment.value)
+    store.createComment({ comment: comment.value, category: selectedCategory.value })
   } catch (error) {
     console.log('something went wrong', error)
   }
@@ -24,7 +28,7 @@ function create() {
 </script>
 
 <template>
-  <ItemContainer>
+  <ItemContainer class="relative">
     <div class="flex flex-col tablet:flex-row items-start tablet:space-x-4">
       <Avatar class="hidden tablet:block" />
 
@@ -43,6 +47,10 @@ function create() {
           Send
         </BaseBtn>
       </div>
+    </div>
+
+    <div class="mt-4 flex justify-end">
+      <CategoryLabels @category="selectedCategory = $event" />
     </div>
   </ItemContainer>
 </template>
